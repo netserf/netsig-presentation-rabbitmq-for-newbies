@@ -73,9 +73,7 @@ def main():
             message_count += 1
             timestamp = datetime.now().isoformat()
             joke = pyjokes.get_joke()
-            message = (
-                f"Message #{message_count} from producer at " f"{timestamp} : {joke}"
-            )
+            message = f"Message #{message_count} from producer at {timestamp} : {joke}"
 
             print(f"[{datetime.now()}] Publishing: {message}")
             result = client.publish(topic, message, qos=1)
