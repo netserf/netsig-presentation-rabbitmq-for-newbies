@@ -1,0 +1,64 @@
+---
+services:
+  rabbitmq-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: netserf/rabbitmq:latest
+    container_name: rabbitmq-server
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=YodaSaysUseStrongPwd9!
+    ports:
+      - "15672:15672"  # Management UI
+      - "1883:1883"    # MQTT
+      - "5672:5672"    # AMQP
+    networks:
+      - rabbitmq-net
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  mqtt-producer:
+    build:
+      context: producer
+      dockerfile: Dockerfile
+    image: netserf/mqtt-producer:latest
+    container_name: mqtt-producer
+    environment:
+      - MQTT_BROKER=rabbitmq-server
+      - MQTT_PORT=1883
+      - MQTT_USER=admin
+      - MQTT_PASS=YodaSaysUseStrongPwd9!
+      - MQTT_TOPIC=demo/topic
+      - PUBLISH_INTERVAL=15
+    networks:
+      - rabbitmq-net
+    depends_on:
+      rabbitmq-server:
+        condition: service_healthy
+
+  mqtt-consumer:
+    build:
+      context: consumer
+      dockerfile: Dockerfile
+    image: netserf/mqtt-consumer:latest
+    container_name: mqtt-consumer
+    environment:
+      - MQTT_BROKER=rabbitmq-server
+      - MQTT_PORT=1883
+      - MQTT_USER=admin
+      - MQTT_PASS=YodaSaysUseStrongPwd9!
+      - MQTT_TOPIC=demo/topic
+    networks:
+      - rabbitmq-net
+    depends_on:
+      rabbitmq-server:
+        condition: service_healthy
+
+networks:
+  rabbitmq-net:
+    driver: bridge
