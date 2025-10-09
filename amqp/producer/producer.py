@@ -39,7 +39,7 @@ def main():
         port=port,
         credentials=credentials,
         heartbeat=600,
-        blocked_connection_timeout=300
+        blocked_connection_timeout=300,
     )
 
     message_count = 0
@@ -64,12 +64,12 @@ def main():
                     message = f"Joke #{message_count} at {timestamp}: {joke}"
 
                     channel.basic_publish(
-                        exchange='',
+                        exchange="",
                         routing_key=queue_name,
                         body=message,
                         properties=pika.BasicProperties(
                             delivery_mode=2,  # Make message persistent
-                        )
+                        ),
                     )
                     print(f"[{datetime.now()}] Published: {message}")
                     time.sleep(interval)
@@ -84,7 +84,7 @@ def main():
                 time.sleep(5)
             finally:
                 try:
-                    if 'connection' in locals() and connection.is_open:
+                    if "connection" in locals() and connection.is_open:
                         connection.close()
                 except Exception as e:
                     print(f"[{datetime.now()}] Error closing connection: {e}")

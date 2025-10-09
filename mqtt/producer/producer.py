@@ -46,7 +46,7 @@ def main():
     client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id="mqtt-producer")
     client.on_connect = on_connect
     client.on_publish = on_publish
-    
+
     # Set username and password
     client.username_pw_set(username, password)
 
@@ -67,14 +67,15 @@ def main():
     try:
         # Start the network loop in background
         client.loop_start()
-        
+
         while True:
             time.sleep(interval)
             message_count += 1
             timestamp = datetime.now().isoformat()
             joke = pyjokes.get_joke()
-            message = f"Message #{message_count} from producer at " \
-                      f"{timestamp} : {joke}"
+            message = (
+                f"Message #{message_count} from producer at " f"{timestamp} : {joke}"
+            )
 
             print(f"[{datetime.now()}] Publishing: {message}")
             result = client.publish(topic, message, qos=1)

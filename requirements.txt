@@ -2,4 +2,4 @@ pre-commit
 ruff
 black
 mypy
-markdownlint-cli2
+mdformat

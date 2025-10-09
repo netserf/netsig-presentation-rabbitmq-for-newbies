@@ -6,14 +6,8 @@ repos:
         args: [--fix]
       - id: ruff-format
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.13.0
+  - repo: https://github.com/executablebooks/mdformat
+    rev: 0.7.22
     hooks:
-      - id: mypy
-        additional_dependencies: [types-all]
-
-  - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.16.0
-    hooks:
-      - id: markdownlint-cli2
-        args: ["--fix"]
+      - id: mdformat
+        args: ["--check"]

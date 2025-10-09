@@ -92,20 +92,20 @@ The following make targets are available for managing the environment:
    make build
    ```
 
-2. Start the environment:
+1. Start the environment:
 
    ```bash
    make up
    ```
 
-3. View the logs to see messages being published and consumed:
+1. View the logs to see messages being published and consumed:
 
    ```bash
    make logs-producer
    make logs-consumer
    ```
 
-4. Access the management UI:
+1. Access the management UI:
 
    ```bash
    make mgmt
@@ -113,7 +113,7 @@ The following make targets are available for managing the environment:
 
    Or navigate to <http://localhost:15672> (username: guest, password: guest)
 
-5. Stop the environment:
+1. Stop the environment:
 
    ```bash
    make down
@@ -187,10 +187,10 @@ This setup uses Docker Compose for orchestration:
 To enable TLS (MQTTS on port 8883):
 
 1. Generate or obtain SSL certificates
-2. Update the `make up` target to expose port 8883
-3. Mount certificates into the RabbitMQ container with `-v` flags
-4. Configure RabbitMQ MQTT plugin for TLS
-5. Update producer/consumer to use TLS connection
+1. Update the `make up` target to expose port 8883
+1. Mount certificates into the RabbitMQ container with `-v` flags
+1. Configure RabbitMQ MQTT plugin for TLS
+1. Update producer/consumer to use TLS connection
 
 ### Adding More Topics
 
@@ -230,6 +230,7 @@ required by your use case.
 If you get a "command not found" error:
 
 - **Docker Desktop users**: Docker Compose is included, ensure Docker Desktop is running
+
 - **Linux users**: Install Docker Compose plugin:
 
   ```bash

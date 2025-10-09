@@ -166,19 +166,19 @@ docker/rabbitmq/amqp/
 ### Producer
 
 1. Connects to RabbitMQ using AMQP protocol
-2. Declares a durable queue
-3. Generates and publishes messages every 15 seconds
-4. Marks messages as persistent
-5. Automatically reconnects on connection failures
+1. Declares a durable queue
+1. Generates and publishes messages every 15 seconds
+1. Marks messages as persistent
+1. Automatically reconnects on connection failures
 
 ### Consumer
 
 1. Connects to RabbitMQ using AMQP protocol
-2. Declares the same durable queue
-3. Sets QoS to process one message at a time
-4. Consumes messages and displays them
-5. Manually acknowledges each message after processing
-6. Automatically reconnects on connection failures
+1. Declares the same durable queue
+1. Sets QoS to process one message at a time
+1. Consumes messages and displays them
+1. Manually acknowledges each message after processing
+1. Automatically reconnects on connection failures
 
 ## AMQP vs MQTT
 
@@ -210,8 +210,9 @@ docker compose logs rabbitmq-server
    make logs-producer
    ```
 
-2. Check queue in management UI at <http://localhost:15672>
-3. Verify consumer is connected:
+1. Check queue in management UI at <http://localhost:15672>
+
+1. Verify consumer is connected:
 
    ```bash
    make logs-consumer

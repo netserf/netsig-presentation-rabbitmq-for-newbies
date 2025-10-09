@@ -69,7 +69,7 @@ make up
 make logs
 ```
 
-Access RabbitMQ Management UI: <http://localhost:15672>  
+Access RabbitMQ Management UI: <http://localhost:15672>\
 (username: `admin`, password: `YodaSaysUseStrongPwd9!`)
 
 **Note:** These are demo credentials for local testing only.
@@ -87,7 +87,7 @@ make up
 make logs
 ```
 
-Access RabbitMQ Management UI: <http://localhost:15672>  
+Access RabbitMQ Management UI: <http://localhost:15672>\
 (username: `guest`, password: `guest`)
 
 **Note:** These are demo credentials for local testing only.

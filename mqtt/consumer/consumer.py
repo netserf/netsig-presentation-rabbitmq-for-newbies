@@ -55,14 +55,12 @@ def main():
     # Create MQTT client with userdata containing topic
     userdata = {"topic": topic}
     client = mqtt.Client(
-        mqtt.CallbackAPIVersion.VERSION2,
-        client_id="mqtt-consumer",
-        userdata=userdata
+        mqtt.CallbackAPIVersion.VERSION2, client_id="mqtt-consumer", userdata=userdata
     )
     client.on_connect = on_connect
     client.on_message = on_message
     client.on_subscribe = on_subscribe
-    
+
     # Set username and password
     client.username_pw_set(username, password)
 

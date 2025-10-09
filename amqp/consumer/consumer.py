@@ -6,7 +6,6 @@ Consumes joke messages from a RabbitMQ queue using AMQP protocol.
 
 import os
 import time
-import sys
 from datetime import datetime
 
 import pika
@@ -20,7 +19,7 @@ def callback(ch, method, properties, body):
     print(f"[{timestamp}] {message}")
     print(f"[{timestamp}] Delivery tag: {method.delivery_tag}")
     print("-" * 80)
-    
+
     # Acknowledge the message
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
@@ -49,7 +48,7 @@ def main():
         port=port,
         credentials=credentials,
         heartbeat=600,
-        blocked_connection_timeout=300
+        blocked_connection_timeout=300,
     )
 
     while True:
@@ -68,9 +67,7 @@ def main():
 
             # Set up consumer
             channel.basic_consume(
-                queue=queue_name,
-                on_message_callback=callback,
-                auto_ack=False
+                queue=queue_name, on_message_callback=callback, auto_ack=False
             )
 
             print(f"[{datetime.now()}] Waiting for messages. To exit press CTRL+C")
@@ -98,7 +95,7 @@ def main():
             time.sleep(5)
         finally:
             try:
-                if 'connection' in locals() and connection.is_open:
+                if "connection" in locals() and connection.is_open:
                     connection.close()
             except Exception as e:
                 print(f"[{datetime.now()}] Error closing connection: {e}")
