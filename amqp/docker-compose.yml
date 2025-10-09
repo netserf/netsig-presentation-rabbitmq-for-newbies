@@ -1,0 +1,60 @@
+---
+services:
+  rabbitmq-server:
+    image: rabbitmq:4.1.4-management
+    container_name: rabbitmq-amqp-server
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=YodaSaysUseStrongPwd9!
+    ports:
+      - "15672:15672"  # Management UI (different port to avoid conflict)
+      - "5672:5672"    # AMQP (different port to avoid conflict)
+    networks:
+      - rabbitmq-amqp-net
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  amqp-producer:
+    build:
+      context: producer
+      dockerfile: Dockerfile
+    image: netserf/amqp-producer:latest
+    container_name: amqp-producer
+    environment:
+      - RABBITMQ_HOST=rabbitmq-server
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=admin
+      - RABBITMQ_PASS=YodaSaysUseStrongPwd9!
+      - QUEUE_NAME=jokes_queue
+      - PUBLISH_INTERVAL=15
+    networks:
+      - rabbitmq-amqp-net
+    depends_on:
+      rabbitmq-server:
+        condition: service_healthy
+
+  amqp-consumer:
+    build:
+      context: consumer
+      dockerfile: Dockerfile
+    image: netserf/amqp-consumer:latest
+    container_name: amqp-consumer
+    environment:
+      - RABBITMQ_HOST=rabbitmq-server
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=admin
+      - RABBITMQ_PASS=YodaSaysUseStrongPwd9!
+      - QUEUE_NAME=jokes_queue
+    networks:
+      - rabbitmq-amqp-net
+    depends_on:
+      rabbitmq-server:
+        condition: service_healthy
+
+networks:
+  rabbitmq-amqp-net:
+    driver: bridge
