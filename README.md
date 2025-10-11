@@ -1,6 +1,6 @@
-# 🔔 NetSIG Presentation - Playing with Pub/Sub
+# 🔔 NetSIG Presentation - RabbitMQ for Newbies
 
-Welcome to *Playing with Pub/Sub*! This repository contains a presentation and
+Welcome to *RabbitMQ for Newbies*! This repository contains a presentation and
 demos designed to introduce you to the world of **publish/subscribe messaging**
 using **RabbitMQ** with both **MQTT** and **AMQP** protocols.
 
@@ -8,7 +8,7 @@ Whether you're a developer curious about message queuing, building IoT
 applications, or designing distributed systems, this repo will help you
 understand the fundamentals of pub/sub messaging patterns.
 
-[![Actions Status](https://github.com/netserf/netsig-presentation-playing-with-pub-sub/workflows/Lint/badge.svg)](https://github.com/netserf/netsig-presentation-playing-with-pub-sub/actions)
+[![Actions Status](https://github.com/netserf/netsig-presentation-rabbitmq-for-newbies/workflows/Lint/badge.svg)](https://github.com/netserf/netsig-presentation-rabbitmq-for-newbies/actions)
 
 ## 📦 Contents
 
@@ -44,7 +44,7 @@ understand the fundamentals of pub/sub messaging patterns.
 ## 🎤 Presentation
 
 The slide deck is available here:
-📽️ [netsig-playing-with-pub-sub.pdf](slides/netsig-playing-with-pub-sub.pdf)
+📽️ [netsig-rabbitmq-for-newbies.pdf](slides/netsig-rabbitmq-for-newbies.pdf)
 
 ## ⚠️ Security Notice
 
