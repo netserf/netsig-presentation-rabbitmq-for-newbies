@@ -81,7 +81,7 @@ The following make targets are available for managing the environment:
 - `make restart-server`: Restarts only the RabbitMQ server
 - `make restart-producer`: Restarts only the producer
 - `make restart-consumer`: Restarts only the consumer
-- `make mgmt`: Opens the RabbitMQ management UI in browser
+- `make ui`: Opens the RabbitMQ management UI in browser
 - `make clean`: Stops containers and removes images
 
 ## Quick Start
@@ -108,7 +108,7 @@ The following make targets are available for managing the environment:
 1. Access the management UI:
 
    ```bash
-   make mgmt
+   make ui
    ```
 
    Or navigate to <http://localhost:15672> (username: guest, password: guest)

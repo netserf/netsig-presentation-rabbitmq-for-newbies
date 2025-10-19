@@ -88,7 +88,7 @@ make logs-producer
 make logs-consumer
 
 # Open RabbitMQ Management UI
-make mgmt
+make ui
 
 # Stop all containers
 make down
