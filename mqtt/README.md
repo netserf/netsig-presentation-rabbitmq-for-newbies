@@ -57,6 +57,54 @@ or a secrets management service.
 - Less control over transactions and advanced routing
 - Ideal for IoT and lightweight messaging scenarios
 
+## ⚠️ Important: RabbitMQ MQTT Broadcast Behavior
+
+**RabbitMQ's MQTT implementation differs from standard MQTT brokers** in how it
+handles multiple subscribers:
+
+### Standard MQTT Behavior (e.g., Mosquitto)
+
+- Multiple subscribers to the same topic all receive published messages
+- True publish/subscribe broadcast pattern
+- Each subscriber gets every message
+
+### RabbitMQ MQTT Behavior (Default)
+
+- RabbitMQ maps MQTT to its AMQP model internally
+- Creates queues for subscriptions and may distribute messages
+- Multiple subscribers might experience load-balancing instead of broadcast
+- This is due to how RabbitMQ binds MQTT subscriptions to AMQP queues
+
+### Configuration for Broadcast
+
+This environment includes a custom `rabbitmq.conf` that configures the MQTT
+plugin to use the `amq.topic` exchange, which helps ensure proper pub/sub
+broadcast behavior. However, the exact behavior may still vary based on:
+
+- Client ID uniqueness
+- Clean session settings
+- QoS levels
+- Subscription timing
+
+### Testing Broadcast Behavior
+
+To test with multiple subscribers using `mosquitto_sub`:
+
+```bash
+# Terminal 1 - First subscriber
+mosquitto_sub -h localhost -t sensors/# -u admin -P YodaSaysUseStrongPwd9!
+
+# Terminal 2 - Second subscriber
+mosquitto_sub -h localhost -t sensors/# -u admin -P YodaSaysUseStrongPwd9!
+
+# Terminal 3 - Publisher
+mosquitto_pub -h localhost -t sensors/temp -m "23.5" \
+  -u admin -P YodaSaysUseStrongPwd9!
+```
+
+**Note:** Always use unique client IDs (`-i sub1`, `-i sub2`) for each
+subscriber. Without unique IDs, the second subscriber will disconnect the first.
+
 ## Prerequisites
 
 - Docker installed
@@ -229,7 +277,8 @@ required by your use case.
 
 If you get a "command not found" error:
 
-- **Docker Desktop users**: Docker Compose is included, ensure Docker Desktop is running
+- **Docker Desktop users**: Docker Compose is included, ensure Docker Desktop
+  is running
 
 - **Linux users**: Install Docker Compose plugin:
 
