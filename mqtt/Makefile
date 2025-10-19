@@ -80,8 +80,8 @@ restart-producer: ## Restart producer only
 restart-consumer: ## Restart consumer only
 	$(COMPOSE) -f $(COMPOSE_FILE) restart $(CONSUMER)
 
-.PHONY: mgmt
-mgmt: ## Open RabbitMQ Management UI in browser
+.PHONY: ui
+ui: ## Open RabbitMQ Management UI in browser
 	@echo "Opening RabbitMQ Management UI..."
 	@echo "URL: http://localhost:15672"
 	@echo "Username: admin"
