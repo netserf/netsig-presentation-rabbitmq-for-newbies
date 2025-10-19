@@ -14,11 +14,15 @@ RUN apt-get update && \
         iproute2 \
         iputils-ping \
         traceroute \
-        tcpdump && \
+        tcpdump \
+        mosquitto-clients && \
     rm -rf /var/lib/apt/lists/*
 
 # Enable MQTT plugin
 RUN rabbitmq-plugins enable --offline rabbitmq_mqtt
+
+# Copy custom RabbitMQ configuration for MQTT broadcast behavior
+COPY rabbitmq.conf /etc/rabbitmq/rabbitmq.conf
 
 # Expose the necessary ports
 # AMQP
