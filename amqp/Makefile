@@ -7,7 +7,7 @@ PRODUCER_IMAGE=netserf/amqp-producer:latest
 CONSUMER_IMAGE=netserf/amqp-consumer:latest
 
 # Container names (defined in docker-compose.yml)
-SERVER=rabbitmq-amqp-server
+SERVER=rabbitmq-server
 PRODUCER=amqp-producer
 CONSUMER=amqp-consumer
 
