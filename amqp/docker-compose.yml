@@ -9,6 +9,8 @@ services:
     ports:
       - "15672:15672"  # Management UI (different port to avoid conflict)
       - "5672:5672"    # AMQP (different port to avoid conflict)
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
     networks:
       - rabbitmq-amqp-net
     healthcheck:
