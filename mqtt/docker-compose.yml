@@ -34,7 +34,7 @@ services:
       - MQTT_USER=admin
       - MQTT_PASS=YodaSaysUseStrongPwd9!
       - MQTT_TOPIC=demo/topic
-      - PUBLISH_INTERVAL=15
+      - PUBLISH_INTERVAL=20
     networks:
       - rabbitmq-net
     depends_on:

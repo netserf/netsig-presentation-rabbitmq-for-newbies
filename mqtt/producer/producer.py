@@ -23,7 +23,8 @@ def on_connect(client, userdata, flags, rc, properties=None):
 
 def on_publish(client, userdata, mid, reason_code=None, properties=None):
     """Callback when message is published."""
-    print(f"[{datetime.now()}] Message published (mid: {mid})")
+    # Simplified logging - details shown in main loop
+    pass
 
 
 def main():
@@ -75,7 +76,9 @@ def main():
             joke = pyjokes.get_joke()
             message = f"Message #{message_count} from producer at {timestamp} : {joke}"
 
-            print(f"[{datetime.now()}] Publishing: {message}")
+            # Show only first 10 characters of the joke
+            joke_preview = joke[:10] + "..." if len(joke) > 10 else joke
+            print(f"[{datetime.now()}] Message sent: {joke_preview}")
             result = client.publish(topic, message, qos=1)
 
             if result.rc != mqtt.MQTT_ERR_SUCCESS:

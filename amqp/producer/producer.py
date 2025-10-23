@@ -71,7 +71,9 @@ def main():
                             delivery_mode=2,  # Make message persistent
                         ),
                     )
-                    print(f"[{datetime.now()}] Published: {message}")
+                    # Show only first 10 characters of the joke
+                    joke_preview = joke[:10] + "..." if len(joke) > 10 else joke
+                    print(f"[{datetime.now()}] Message sent: {joke_preview}")
                     time.sleep(interval)
 
             except pika.exceptions.AMQPConnectionError as e:
