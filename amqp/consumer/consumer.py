@@ -15,10 +15,15 @@ def callback(ch, method, properties, body):
     """Callback function to process received messages."""
     timestamp = datetime.now()
     message = body.decode()
-    print(f"[{timestamp}] Received message:")
-    print(f"[{timestamp}] {message}")
-    print(f"[{timestamp}] Delivery tag: {method.delivery_tag}")
-    print("-" * 80)
+
+    # Extract just the joke from the message
+    # Message format: "Joke #X at TIMESTAMP: JOKE"
+    if ": " in message:
+        joke = message.split(": ", 1)[1]
+    else:
+        joke = message
+
+    print(f"\n[{timestamp}] Message received: {joke}\n")
 
     # Acknowledge the message
     ch.basic_ack(delivery_tag=method.delivery_tag)

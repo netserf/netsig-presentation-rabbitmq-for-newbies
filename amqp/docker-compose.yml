@@ -32,7 +32,7 @@ services:
       - RABBITMQ_USER=admin
       - RABBITMQ_PASS=YodaSaysUseStrongPwd9!
       - QUEUE_NAME=jokes_queue
-      - PUBLISH_INTERVAL=15
+      - PUBLISH_INTERVAL=20
     networks:
       - rabbitmq-amqp-net
     depends_on:

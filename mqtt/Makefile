@@ -37,8 +37,8 @@ ps: ## List running containers
 	$(COMPOSE) -f $(COMPOSE_FILE) ps
 
 .PHONY: logs
-logs: ## Show logs from all containers (follow mode)
-	$(COMPOSE) -f $(COMPOSE_FILE) logs -f
+logs: ## Show logs from RabbitMQ server (follow mode)
+	$(COMPOSE) -f $(COMPOSE_FILE) logs -f $(SERVER)
 
 .PHONY: logs-server
 logs-server: ## Show logs from RabbitMQ server

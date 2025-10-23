@@ -27,10 +27,16 @@ def on_connect(client, userdata, flags, rc, properties=None):
 def on_message(client, userdata, msg):
     """Callback when a message is received."""
     timestamp = datetime.now()
-    print(f"[{timestamp}] Received message on topic '{msg.topic}':")
-    print(f"[{timestamp}] Payload: {msg.payload.decode()}")
-    print(f"[{timestamp}] QoS: {msg.qos}")
-    print("-" * 80)
+    payload = msg.payload.decode()
+
+    # Extract just the joke from the message
+    # Message format: "Message #X from producer at TIMESTAMP : JOKE"
+    if " : " in payload:
+        joke = payload.split(" : ", 1)[1]
+    else:
+        joke = payload
+
+    print(f"\n[{timestamp}] Message received: {joke}\n")
 
 
 def on_subscribe(client, userdata, mid, granted_qos, properties=None):
